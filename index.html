@@ -35,7 +35,7 @@
 
             var minutes = Math.floor(countdown / 60);
             var seconds = countdown % 60;
-            document.getElementById(bossName + 'Timer').innerText = minutes + ' 分 ' + seconds + ' 秒';
+            document.getElementById(bossName + 'Timer').innerText = minutes + ' 分 ';
 
             timers[bossName] = setInterval(function () {
                 countdown--;
@@ -45,7 +45,7 @@
                 } else {
                     minutes = Math.floor(countdown / 60);
                     seconds = countdown % 60;
-                    document.getElementById(bossName + 'Timer').innerText = minutes + ' 分 ' + seconds + ' 秒';
+                    document.getElementById(bossName + 'Timer').innerText = minutes + ' 分 ';
                 }
             }, 1000);  // 1 second
         }
