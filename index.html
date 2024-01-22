@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>PalRePop</h1>
+    <table id="bossTable">
+        <tr>
+            <th>ボス名</th>
+            <th>レベル</th>
+            <th>Popまでのタイマー</th>
+            <th>討伐ボタン</th>
+        </tr>
+
+    </table>
+
+    <script>
+        var timers = {};
+
+        function startTimer(bossName) {
+
+            if (timers[bossName]) {
+                clearTimeout(timers[bossName]);
+            }
+
+            var countdown = 60; // 60 minutes
+            document.getElementById(bossName + 'Timer').innerText = countdown + ' minutes';
+
+
+            timers[bossName] = setInterval(function () {
+                countdown--;
+                if (countdown <= 0) {
+                    clearInterval(timers[bossName]);
+                    document.getElementById(bossName + 'Timer').innerText = 'りぽっぷ！';
+                } else {
+                    document.getElementById(bossName + 'Timer').innerText = countdown + ' minutes';
+                }
+            }, 60 * 1000);  // 1 minute
+        }
+
+
+        var bosses = [
+            { name: 'キャプペン', level: 15 },
+            { name: 'ホークウィン', level: 18 },
+            { name: 'トドドドン', level: 14 },
+            { name: 'クインビーナ', level: 31 },
+            { name: 'ドンモップ', level: 11 },
+            { name: 'オコチョ', level: 11 },
+            { name: 'ライコーン', level: 31 },
+            { name: 'ミステリア', level: 32 },
+            { name: 'ビリビリュー', level: 47 },
+            { name: 'ツジギリ', level: 23 },
+            { name: 'ライバード', level: 29 },
+            { name: 'クレメーオ', level: 23 },
+            { name: 'ラベロット', level: 35 },
+            { name: 'ヴィオレッタ', level: 38 },
+            { name: 'シルキーヌ', level: 40 },
+            { name: 'シルフィア', level: 30 },
+            { name: 'アズレーン', level: 17 },
+            { name: 'パリピドン', level: 31 },
+            { name: 'ラブラドン', level: 23 },
+            { name: 'スプラドン', level: 30 },
+            { name: 'フラリーナ', level: 28 },
+            { name: 'アルパオー', level: 23 },
+            { name: 'グランモス', level: 38 },
+            { name: 'トロピティ', level: 38 },
+            { name: 'グラクレス', level: 30 },
+            { name: 'ムラクモ', level: 25 },
+            { name: 'フェスキー', level: 23 },
+            { name: 'ボルカイザー', level: 49 },
+            { name: 'ジオラーヴァ', level: 48 },
+            { name: 'デスティング', level: 44 },
+            { name: 'アヌビス', level: 47 },
+            { name: 'レヴィドラ', level: 45 },
+            { name: 'スザク', level: 45 },
+            { name: 'ルナクイン', level: 49 },
+            { name: 'セイントール', level: 50 },
+            { name: 'ベイントール', level: 50 },
+            { name: 'グレイシャル', level: 50 },
+            { name: 'ジェッドラン', level: 50 },
+
+            // Add more bosses as needed
+        ];
+
+
+        bosses.sort(function (a, b) {
+            return a.level - b.level;
+        });
+
+        var table = document.getElementById('bossTable');
+        for (var i = 0; i < bosses.length; i++) {
+            var row = table.insertRow(-1);
+            row.insertCell(0).innerText = bosses[i].name;
+            row.insertCell(1).innerText = bosses[i].level;
+            var timerCell = row.insertCell(2);
+            timerCell.id = bosses[i].name + 'Timer';
+            var buttonCell = row.insertCell(3);
+            buttonCell.innerHTML = '<button onclick="startTimer(\'' + bosses[i].name + '\')">討伐！</button>';
+        }
+    </script>
+</body>
+
+</html>
