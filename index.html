@@ -27,14 +27,15 @@
         var timers = {};
 
         function startTimer(bossName) {
-
             if (timers[bossName]) {
                 clearTimeout(timers[bossName]);
             }
 
-            var countdown = 60; // 60 minutes
-            document.getElementById(bossName + 'Timer').innerText = countdown + ' minutes';
+            var countdown = 60 * 60; // 60 minutes in seconds
 
+            var minutes = Math.floor(countdown / 60);
+            var seconds = countdown % 60;
+            document.getElementById(bossName + 'Timer').innerText = minutes + ' 分 ' + seconds + ' 秒';
 
             timers[bossName] = setInterval(function () {
                 countdown--;
@@ -42,9 +43,11 @@
                     clearInterval(timers[bossName]);
                     document.getElementById(bossName + 'Timer').innerText = 'りぽっぷ！';
                 } else {
-                    document.getElementById(bossName + 'Timer').innerText = countdown + ' minutes';
+                    minutes = Math.floor(countdown / 60);
+                    seconds = countdown % 60;
+                    document.getElementById(bossName + 'Timer').innerText = minutes + ' 分 ' + seconds + ' 秒';
                 }
-            }, 60 * 1000);  // 1 minute
+            }, 1000);  // 1 second
         }
 
 
